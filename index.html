@@ -13,8 +13,14 @@
       background-image: url('https://i.postimg.cc/hPbQKhLR/1000038281.jpg');
       background-repeat: no-repeat;
       background-position: center center;
-      background-attachment: fixed;
       background-size: cover;
+      background-attachment: fixed;
+    }
+    /* Mobile fix: disable fixed background on small screens */
+    @media (max-width: 768px) {
+      body {
+        background-attachment: scroll;
+      }
     }
     .overlay {
       background-color: rgba(0, 0, 0, 0.6);
@@ -31,6 +37,11 @@
     #countdown {
       font-size: 2em;
       margin-top: 20px;
+    }
+    /* Scale text down on small screens */
+    @media (max-width: 500px) {
+      h1 { font-size: 2em; }
+      #countdown { font-size: 1.5em; }
     }
   </style>
 </head>
@@ -60,7 +71,7 @@
       }
     }
 
-    updateCountdown(); // run immediately so it doesn’t wait 1s
+    updateCountdown(); // run immediately
     setInterval(updateCountdown, 1000);
   </script>
 </body>
