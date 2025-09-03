@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title> Thailand Countdown</title>
+  <title>Thailand Countdown</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       color: white;
       text-align: center;
-      background: url ('https://i.postimg.cc/hPbQKhLR/1000038281.jpg')  no-repeat center center fixed;
+      background-image: url('https://i.postimg.cc/hPbQKhLR/1000038281.jpg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
       background-size: cover;
     }
     .overlay {
@@ -30,7 +33,7 @@
 </head>
 <body>
   <div class="overlay">
-    <h1>🌴  Thailand Adventure Begins In... 🌴</h1>
+    <h1>🌴 Thailand Adventure Begins In... 🌴</h1>
     <div id="countdown"></div>
   </div>
 
@@ -54,6 +57,7 @@
       }
     }
 
+    updateCountdown(); // run immediately so it doesn’t wait 1s
     setInterval(updateCountdown, 1000);
   </script>
 </body>
