@@ -5,96 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Thailand Countdown</title>
   <style>
-    :root {
-      --bg-url: url('https://i.postimg.cc/hPbQKhLR/1000038281.jpg');
-    }
-
-    /* Base reset & typography */
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
-      color: #fff;
-    }
-
-    /* Background layer */
-    .bg {
-      position: fixed; /* desktop: nice parallax feel */
-      inset: 0;
-      z-index: -2;
-      background-image: var(--bg-url);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      text-align: center;
+      background-image: url('https://i.postimg.cc/hPbQKhLR/1000038281.jpg');
       background-repeat: no-repeat;
       background-position: center center;
-      background-size: cover; /* desktop: full-bleed (may crop a little) */
-    }
-
-    /* Blurred fill to hide any letterboxing when we use "contain" on mobile */
-    .bg::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -3;
-      background-image: var(--bg-url);
-      background-repeat: no-repeat;
-      background-position: center;
+      background-attachment: fixed;
       background-size: cover;
-      filter: blur(24px);
-      transform: scale(1.12);
-      opacity: 0.6;
     }
-
-    /* Content overlay */
     .overlay {
-      position: relative;
-      z-index: 1;
       background-color: rgba(0, 0, 0, 0.6);
-      min-height: 100dvh; /* uses the dynamic viewport height on mobile */
+      padding: 50px 20px;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      padding: 56px 20px;
-      text-align: center;
     }
-
     h1 {
-      font-size: 3rem;
-      line-height: 1.1;
-      margin: 0 0 20px;
-      text-wrap: balance;
+      font-size: 3em;
+      margin-bottom: 20px;
     }
-
     #countdown {
-      font-size: 2rem;
-      margin-top: 8px;
-      letter-spacing: 0.5px;
-    }
-
-    /* MOBILE TWEAKS
-       - Avoid fixed backgrounds (buggy on iOS)
-       - Show the WHOLE image (no cropping) with "contain"
-       - Keep it centered; blurred layer fills the rest nicely
-    */
-    @media (max-width: 768px) {
-      .bg {
-        position: absolute;          /* no fixed on mobile */
-        background-size: contain;    /* show entire image */
-        background-position: center; /* keep it centered */
-        background-color: #000;      /* safety fill behind image */
-      }
-
-      h1 { font-size: 2rem; }
-      #countdown { font-size: 1.5rem; }
-      .overlay { padding: 40px 16px; }
-    }
-
-    /* Tiny phones */
-    @media (max-width: 380px) {
-      h1 { font-size: 1.75rem; }
-      #countdown { font-size: 1.25rem; }
+      font-size: 2em;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <!-- Background layer -->
-  <div clas
+  <div class="overlay">
+    <h1>🌴 Thailand Adventure Begins In... 🌴</h1>
+    <div id="countdown"></div>
+  </div>
+
+  <script>
+    const targetDate = new Date("2026-06-05T00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "You're in Thailand! 🎉";
+      }
+    }
+
+    updateCountdown(); // run immediately so it doesn’t wait 1s
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
